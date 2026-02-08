@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+    <style>
+        body {
+            font-family: monospace;
+            background: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        input {
+            background: #000;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 8px;
+            font-size: 16px;
+            font-family: monospace;
+            width: 100px;
+            text-align: center;
+        }
+
+        button {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            font-size: 16px;
+            font-family: monospace;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        button:hover {
+            background: #ccc;
+        }
+
+        .feedback {
+            margin: 20px 0;
+            min-height: 20px;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404 - page not found</h1>
+        <p>guess the error code (1-1000)</p>
+        <p>attempts: <span id="attempts">0</span></p>
+        
+        <div class="feedback" id="feedback"></div>
+
+        <div>
+            <input type="number" id="guess" min="1" max="1000" autofocus>
+            <button onclick="makeGuess()">guess</button>
+        </div>
+
+        <p style="margin-top: 20px;"><a href="/">go home</a></p>
+    </div>
+
+    <script>
+        const target = 404;
+        let attempts = 0;
+
+        document.getElementById('guess').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') makeGuess();
+        });
+
+        function makeGuess() {
+            const guess = parseInt(document.getElementById('guess').value);
+            const feedback = document.getElementById('feedback');
+            
+            if (!guess || guess < 1 || guess > 1000) return;
+            
+            attempts++;
+            document.getElementById('attempts').textContent = attempts;
+            
+            if (guess === target) 
+            {
+                feedback.textContent = 'correct! you found the page.';
+                document.getElementById('guess').disabled = true;
+            } 
+            else if (guess < target) 
+            {
+                feedback.textContent = 'too low';
+            } 
+            else 
+            {
+                feedback.textContent = 'too high';
+            }
+            
+            document.getElementById('guess').value = '';
+        }
+    </script>
+</body>
+</html>
