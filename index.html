@@ -68,7 +68,7 @@
 <body>
     <div class="container">
         <h1>404 - page not found</h1>
-        <p>guess the number ;)</p>
+        <p>guess the number (1-1000)</p>
         <p>attempts: <span id="attempts">0</span></p>
         
         <div class="feedback" id="feedback"></div>
@@ -95,7 +95,7 @@
             
             if (guess === target) 
             {
-                feedback.textContent = 'correct! you found the page.';
+                feedback.textContent = 'correct! you found the page ;)';
                 document.getElementById('guess').disabled = true;
             } 
             else if (guess < target) 
